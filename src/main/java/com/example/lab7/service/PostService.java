@@ -1,7 +1,7 @@
 package com.example.lab7.service;
 
 import com.example.lab7.db.dao.PostDao;
-import com.example.lab7.entity.Post;
+import com.example.lab7.bean.Post;
 
 import java.util.List;
 

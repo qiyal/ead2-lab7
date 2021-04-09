@@ -1,4 +1,39 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="com.example.lab7.bean.Post" %>
+<%@ page import="java.util.*" %>
+<jsp:useBean id="postDao" class="com.example.lab7.db.dao.PostDao" scope="session"/>
+<jsp:useBean id="commentDao" class="com.example.lab7.db.dao.CommentDao" scope="session"/>
+<jsp:useBean id="userDao" class="com.example.lab7.db.dao.UserDao" scope="session"/>
+
+<%
+    List<Post> posts = new ArrayList<>(postDao.getAllPost());
+    String postStr = "";
+
+    for (Post post : posts) {
+        postStr += "<div class=\"post-card\">\n" +
+                "                <a href=\"post?id="+ post.getId() + "\">\n" +
+                "                    <div class=\"post-title\">" + post.getTitle() + "</div>\n" +
+                "                </a>\n" +
+                "\n" +
+                "                <div class=\"flex-post-info\">\n" +
+                "\n" +
+                "                    <div class=\"flex-post-info-child\">\n" +
+                "                        <span>" + post.getCountLike() + " likes</span>\n" +
+                "                        <span>" + commentDao.getCountCommentsById(post.getId()) + " comments</span>\n" +
+                "                    </div>\n" +
+                "\n" +
+                "                    <div class=\"flex-post-info-child text-right\">\n" +
+                "                        <div>\n" +
+                "                            <div>" + post.getDay() + "</div>\n" +
+                "                            <div> publisher: " + userDao.getUserById(post.getUserId()).getUsername() + "</div>\n" +
+                "                        </div>\n" +
+                "                    </div>\n" +
+                "                </div>\n" +
+                "\n" +
+                "            </div>";
+    }
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,85 +46,7 @@
 
     <div class="flex-div flex-direct-column">
         <div class="flex-child">
-
-            <%-- Post Card open --%>
-            <div class="post-card">
-                <a href="#">
-                    <div class="post-title">Post Name</div>
-                </a>
-
-                <%-- Post Info Flex close --%>
-                <div class="flex-post-info">
-
-                    <div class="flex-post-info-child">
-                        <span>100 likes</span>
-                        <span>100 comments</span>
-                    </div>
-
-                    <div class="flex-post-info-child text-right">
-                        <div>
-                            <div>nico</div>
-                            <div>21-05-2021</div>
-                        </div>
-                    </div>
-                </div>
-                <%-- Post Info Flex close --%>
-
-            </div>
-            <%-- Post Card open --%>
-
-                <%-- Post Card open --%>
-                <div class="post-card">
-                    <a class="link" href="#">
-                        <div class="post-title">Post Name</div>
-                    </a>
-
-                    <%-- Post Info Flex close --%>
-                    <div class="flex-post-info">
-
-                        <div class="flex-post-info-child">
-                            <span>100 likes</span>
-                            <span>100 comments</span>
-                        </div>
-
-                        <div class="flex-post-info-child">
-                            <div>
-                                <div>nico</div>
-                                <div>21-05-2021</div>
-                            </div>
-                        </div>
-                    </div>
-                    <%-- Post Info Flex close --%>
-
-                </div>
-                <%-- Post Card open --%>
-
-                <%-- Post Card open --%>
-                <div class="post-card">
-                    <a href="#">
-                        <div class="post-title">Post Name</div>
-                    </a>
-
-                    <%-- Post Info Flex close --%>
-                    <div class="flex-post-info">
-
-                        <div class="flex-post-info-child">
-                            <span>100 likes</span>
-                            <span>100 comments</span>
-                        </div>
-
-                        <div class="flex-post-info-child text-right">
-                            <div>
-                                <div>nico</div>
-                                <div>21-05-2021</div>
-                            </div>
-                        </div>
-                    </div>
-                    <%-- Post Info Flex close --%>
-
-                </div>
-                <%-- Post Card open --%>
-
+            <%= postStr %>
         </div>
     </div>
 

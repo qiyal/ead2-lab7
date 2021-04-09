@@ -1,6 +1,8 @@
-package com.example.lab7.entity;
+package com.example.lab7.bean;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private Integer id;
     private String username;
     private String password;
@@ -8,13 +10,6 @@ public class User {
 
     // constrictors
     public User() {}
-
-    public User(Integer id, String username, String password, String name) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.name = name;
-    }
 
     // getter and setter
     public Integer getId() {

@@ -1,8 +1,9 @@
-package com.example.lab7.entity;
+package com.example.lab7.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Post {
+public class Post implements Serializable {
     private Integer id;
     private Integer userId;
     private String title;
@@ -12,15 +13,6 @@ public class Post {
 
     // constrictors
     public Post() {}
-
-    public Post(Integer id, Integer userId, String title, String text, Integer countLike, Date day) {
-        this.id = id;
-        this.userId = userId;
-        this.title = title;
-        this.text = text;
-        this.countLike = countLike;
-        this.day = day;
-    }
 
     // getters and setters
     public Integer getId() {
