@@ -1,14 +1,13 @@
 package com.example.lab7.db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class DBConnection {
     private String url;
     private String username;
     private String password;
     private Connection connection;
+    private boolean isConnect = false;
 
     // constructors
     public DBConnection() {}
@@ -45,7 +44,19 @@ public class DBConnection {
     }
 
     public Connection getConnection() {
+        if (!isConnect) {
+            openConnect();
+            isConnect = true;
+        }
         return connection;
+    }
+
+    public boolean isConnect() {
+        return isConnect;
+    }
+
+    public void setConnect(boolean connect) {
+        isConnect = connect;
     }
 
     public void setConnection(Connection connection) {
@@ -56,7 +67,10 @@ public class DBConnection {
     public void openConnect() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(url, username, password);
+            if (!isConnect) {
+                connection = DriverManager.getConnection(url, username, password);
+                isConnect = true;
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             System.out.println("DB Connection open false!");
@@ -72,5 +86,18 @@ public class DBConnection {
             System.out.println(e.getMessage());
             System.out.println("DB Connection close false!");
         }
+    }
+
+    public ResultSet getData(String sql) {
+        ResultSet resultSet = null;
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException sqlEx) {
+            System.out.println("SQL query failed!");
+            System.out.println(sqlEx);
+        }
+        return resultSet;
     }
 }

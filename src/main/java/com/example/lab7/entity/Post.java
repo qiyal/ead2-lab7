@@ -62,4 +62,12 @@ public class Post {
     public void setCountLike(Integer countLike) {
         this.countLike = countLike;
     }
+
+    public Date getDay() {
+        return day;
+    }
+
+    public void setDay(Date day) {
+        this.day = day;
+    }
 }
