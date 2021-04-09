@@ -7,6 +7,7 @@ public class User implements Serializable {
     private String username;
     private String password;
     private String name;
+    private String urlImage;
 
     // constrictors
     public User() {}
@@ -42,5 +43,13 @@ public class User implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
     }
 }

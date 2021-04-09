@@ -1,4 +1,3 @@
-<%@ page import="com.example.lab7.bean.PostBean" %>
 <%@ page import="com.example.lab7.bean.Comment" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
@@ -81,7 +80,6 @@
         </div>
 
     </div>
-
 
 </body>
 </html>

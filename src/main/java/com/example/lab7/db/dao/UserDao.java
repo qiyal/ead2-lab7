@@ -45,4 +45,25 @@ public class UserDao {
 
         return user;
     }
+
+    public User getUserByUsernamePassword(String username, String password) {
+        dbConnection.openConnect();
+        User user = null;
+        String sql = "SELECT * FROM "+ tableName +" WHERE username = '" + username + "' AND password = '" + password + "'";
+        ResultSet resultSet = dbConnection.getData(sql);
+
+        try {
+            resultSet.next();
+
+            Integer userId = resultSet.getInt("id");
+            String name = resultSet.getString("name");
+
+            user = getUserObject(userId, username, password, name);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("GET USER By Username and Password error!");
+        }
+
+        return user;
+    }
 }

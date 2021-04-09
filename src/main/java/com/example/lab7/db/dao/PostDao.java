@@ -75,4 +75,20 @@ public class PostDao {
 
         return posts;
     }
+
+    public int getCountByUserId(Integer userId) {
+        String sql = "SELECT COUNT(user_id) as 'count_post_id' FROM " + tableName + " WHERE user_id = " + userId;
+        ResultSet resultSet = dbConnection.getData("SELECT * FROM " + tableName);
+        int count = 0;
+
+        try{
+            resultSet.next();
+            count = resultSet.getInt("count_post_id");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("GET COUNT By user_id");
+        }
+
+        return count;
+    }
 }
